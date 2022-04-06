@@ -1,0 +1,37 @@
+// MongoDB Playground
+// To disable this template go to Settings | MongoDB | Use Default Template For Playground.
+// Make sure you are connected to enable completions and to be able to run a playground.
+// Use Ctrl+Space inside a snippet or a string literal to trigger completions.
+
+// Select the database to use.
+use('deqode-practice');
+
+// The drop() command destroys all data from a collection.
+// Make sure you run it against the correct database and collection.
+db.students.drop();
+
+// Insert a few documents into the students collection.
+db.students.insertMany([
+  { '_id': 1, 'username': 'harry.potter', 'firstName': 'harry', 'lastName': 'potter', 'gender': 'MALE', 'email': 'harry.potter@hogwarts.com', 'dateOfBirth': new Date('1980-07-31')},
+  { '_id': 2, 'username': 'ronald.weasley', 'firstName': 'ronald', 'lastName': 'weasley', 'gender': 'MALE', 'email': 'ronald.weasley@hogwarts.com', 'dateOfBirth': new Date('1980-03-01')},
+  { '_id': 3, 'username': 'hermione.granger', 'firstName': 'hermione', 'lastName': 'granger', 'gender': 'FEMALE', 'email': 'hermione.granger@hogwarts.com', 'dateOfBirth': new Date('1979-09-19')},
+  { '_id': 4, 'username': 'neville.longbottom', 'firstName': 'neville', 'lastName': 'longbottom', 'gender': 'MALE', 'email': 'neville.longbottom@hogwarts.com', 'dateOfBirth': new Date('1980-07-30')},
+  { '_id': 5, 'username': 'draco.malfoy', 'firstName': 'draco', 'lastName': 'malfoy', 'gender': 'MALE', 'email': 'draco.malfoy@hogwarts.com', 'dateOfBirth': new Date('1980-06-05')},
+  { '_id': 6, 'username': 'seamus.finnigan', 'firstName': 'seamus', 'lastName': 'finnigan', 'gender': 'MALE', 'email': 'seamus.finnigan@hogwarts.com', 'dateOfBirth': new Date('1980-08-12')},
+  { '_id': 7, 'username': 'ginny.weasley', 'firstName': 'ginny', 'lastName': 'weasley', 'gender': 'FEMALE', 'email': 'ginny.weasley@hogwarts.com', 'dateOfBirth': new Date('1981-08-11')},
+]);
+
+// find all students that have 'ot' in username, s used to allow dot (.) in regex and i allows case-insensitive operation
+db.students.find({username: { $regex: /.*ot.*/, $options: 'si'}})
+
+// get all male students, show only username, firstname ,lastname
+db.students.find({gender: "MALE"}, {_id: 0, username: 1, firstName: 1, lastName: 1})
+
+// find all student that where born after july 1980
+db.students.find({dateOfBirth: {$gt: new Date('1980-07-31')}})
+
+
+
+
+
+
